@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    * {
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(135deg, #ff758c, #ff7eb3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        color: white;
+    }
+
+    .container {
+        text-align: center;
+        padding: 20px;
+        max-width: 90%;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+        text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .buttons {
+        position: relative;
+        height: 120px;
+    }
+
+    button {
+        padding: 14px 28px;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    #yesBtn {
+        background: #ff2e63;
+        color: white;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        margin-right: 20px;
+    }
+
+    #yesBtn:hover {
+        transform: scale(1.1);
+    }
+
+    #noBtn {
+        position: absolute;
+        background: white;
+        color: #ff2e63;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+
+    .message {
+        font-size: 2rem;
+        margin-top: 30px;
+        display: none;
+    }
+
+    .share {
+        margin-top: 30px;
+        font-size: 1rem;
+        background: rgba(255,255,255,0.2);
+        padding: 10px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+        display: inline-block;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1 id="mainText">I love you Purba ❤️<br>Will you be my Valentine?</h1>
+
+    <div class="buttons">
+        <button id="yesBtn">Yes 💖</button>
+        <button id="noBtn">No 😢</button>
+    </div>
+
+    <div class="message" id="loveMsg">
+        I know you love me too 😘
+    </div>
+
+    <div class="share" onclick="sharePage()">
+        🔗 Share this with love
+    </div>
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const loveMsg = document.getElementById("loveMsg");
+    const mainText = document.getElementById("mainText");
+
+    const noTexts = [
+        "Really? 🥺",
+        "Think again 😶",
+        "Think once more 💔",
+        "Are you sure? 😢",
+        "Don’t break my heart 😭",
+        "Last chance 😳"
+    ];
+
+    let count = 0;
+
+    noBtn.style.left = "50%";
+    noBtn.style.top = "20px";
+
+    noBtn.addEventListener("click", () => {
+        const x = Math.random() * 60;
+        const y = Math.random() * 60;
+
+        noBtn.style.left = x + "%";
+        noBtn.style.top = y + "px";
+
+        noBtn.textContent = noTexts[count % noTexts.length];
+        count++;
+    });
+
+    yesBtn.addEventListener("click", () => {
+        mainText.style.display = "none";
+        document.querySelector(".buttons").style.display = "none";
+        loveMsg.style.display = "block";
+    });
+
+    function sharePage() {
+        const shareData = {
+            title: "Be My Valentine ❤️",
+            text: "Someone has something special to ask you 💖",
+            url: window.location.href
+        };
+
+        if (navigator.share) {
+            navigator.share(shareData);
+        } else {
+            navigator.clipboard.writeText(window.location.href);
+            alert("Link copied! 💌");
+        }
+    }
+</script>
+
+</body>
+</html>
